@@ -34,15 +34,40 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/auth-next',
     '@nuxtjs/axios',
   ],
+  // auth:
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          required: false,
+          type: false
+        },
+        // cookie: {
+        //   // (optional) If set we check this cookie exsistence for loggedIn check
+        //   name: 'XSRF-TOKEN',
+        // },
+        endpoints: {
+          // (optional) If set, we send a get request to this endpoint before login
+          // csrf: { url: '/csrf'/*, method: 'get', propertyName: 'data.token'*/ },
+          login: { url: '/login', method: 'patch' },
+          // refresh: { url: '/refresh', method: 'post' },
+          user: { url: '/me', method: 'get' },
+          logout: { url: '/logout', method: 'post' },
+        }
+      },
+    }
+  },
+  // axios:
   axios : {
     credentials: true,
     withCredentials: true,
   },
   publicRuntimeConfig: {
     axios: {
-      baseURL: 'http://localhost:5000',
+      baseURL: process.env.API_URL || 'http://localhost:5000/api/v01',
     }
   },
 

@@ -58,7 +58,7 @@ export default {
       }
 
       try {
-        await this.$axios.post('/api/v01/register', payload)
+        await this.$axios.post('/register', payload)
       } catch(e) {
         this.error = e.response ? e.response.data.message : e
       }

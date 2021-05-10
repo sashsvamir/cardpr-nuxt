@@ -70,7 +70,7 @@ export default {
       }
 
       try {
-        const res = await this.$axios.post('/api/v01/login', payload)
+        const res = await this.$axios.post('/login', payload)
         this.token_waiting = true
         this.phone = res.data.phone
       } catch(e) {
@@ -86,10 +86,7 @@ export default {
       }
 
       try {
-        await this.$axios.patch('/api/v01/login', payload)
-        const res = await this.$axios.get('/api/v01/me')
-        this.$store.commit('auth/loginWith', { user: res.data.user })
-        this.$router.push('/')
+        await this.$auth.loginWith('local', { data: payload })
       } catch(e) {
         this.error = e.response ? e.response.data.message : e
       }

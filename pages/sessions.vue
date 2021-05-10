@@ -39,14 +39,14 @@ export default {
   // call fetch only on client-side
   fetchOnServer: false,
   async fetch() {
-    const res = await this.$axios.get('/api/v01/sessions')
+    const res = await this.$axios.get('/sessions')
     this.current_id = res.data.current_id
     this.sessions = res.data.sessions
   },
 
   methods: {
     onClickRemove(session) {
-      this.$axios.delete('/api/v01/session/' + session.id)
+      this.$axios.delete('/session/' + session.id)
         .then(res => {
           this.fetch()
         })

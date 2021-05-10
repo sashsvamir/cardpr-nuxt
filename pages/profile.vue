@@ -65,14 +65,14 @@ export default {
   // call fetch only on client-side
   // fetchOnServer: false,
   // async fetch() {
-  //   const res = await this.$axios.get('/api/v01/sessions')
+  //   const res = await this.$axios.get('/sessions')
   //   this.current_id = res.data.current_id
   //   this.sessions = res.data.sessions
   // },
 
   computed: {
     loggedInUser() {
-      return this.$store.state.auth.user
+      return this.$auth.loggedIn
     },
   },
 
@@ -85,7 +85,7 @@ export default {
         password_confirmation: this.password_confirmation,
       }
 
-      this.$axios.post('/api/v01/password', payload)
+      this.$axios.post('/password', payload)
         .then(res => {
           alert('password was changes')
           this.clearForm()

@@ -14,14 +14,14 @@
 export default {
   computed: {
     isAuthenticated () {
-      return !!this.$store.state.auth.user
+      return this.$auth.loggedIn
     }
   },
   methods: {
     onClickLogout() {
-      this.$axios.post('/api/v01/logout')
+      this.$auth.logout(/*'/logout'*/)
         .then(res => {
-          this.$store.commit('auth/logout')
+          // this.$store.commit('auth/logout')
           this.$router.push('/')
         })
         .catch(err => console.log(err))
