@@ -31,7 +31,7 @@
 
     <div class="has-text-centered" style="margin-top: 20px">
       <p>
-        Don't have an account? <nuxt-link to="/register">Register</nuxt-link>
+        Forgot your password? <nuxt-link to="/password-reset-request">Recover</nuxt-link>
       </p>
     </div>
   </div>
@@ -73,6 +73,7 @@ export default {
         const res = await this.$axios.post('/login', payload)
         this.token_waiting = true
         this.phone = res.data.phone
+        this.error = null
       } catch(e) {
         this.error = e.response ? e.response.data.message : e
       }
@@ -87,6 +88,7 @@ export default {
 
       try {
         await this.$auth.loginWith('local', { data: payload })
+        this.error = null
       } catch(e) {
         this.error = e.response ? e.response.data.message : e
       }
