@@ -44,13 +44,15 @@ export default {
   },
 
   methods: {
-    onSubmit() {
+    async onSubmit() {
       const payload = {
         email: this.email,
         token: this.reset_password_token,
         password: this.password,
         password_confirmation: this.password_confirmation,
       }
+
+      await this.$axios.get('/csrf') // get csrf cookie
 
       this.$axios.post('/password-reset', payload)
         .then(res => {

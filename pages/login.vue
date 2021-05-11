@@ -70,6 +70,7 @@ export default {
       }
 
       try {
+        await this.$axios.get('/csrf') // get csrf cookie
         const res = await this.$axios.post('/login', payload)
         this.token_waiting = true
         this.phone = res.data.phone
@@ -87,7 +88,7 @@ export default {
       }
 
       try {
-        await this.$auth.loginWith('local', { data: payload })
+        await this.$auth.loginWith('cookie', { data: payload })
         this.error = null
       } catch(e) {
         this.error = e.response ? e.response.data.message : e

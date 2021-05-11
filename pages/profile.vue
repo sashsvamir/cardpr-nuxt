@@ -77,13 +77,15 @@ export default {
   },
 
   methods: {
-    onSubmit() {
+    async onSubmit() {
       const payload = {
         // email: this.loggedInUser.email,
         old_password: this.old_password,
         password: this.password,
         password_confirmation: this.password_confirmation,
       }
+
+      await this.$axios.get('/csrf') // get csrf cookie
 
       this.$axios.post('/password', payload)
         .then(res => {

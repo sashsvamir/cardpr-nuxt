@@ -45,7 +45,10 @@ export default {
   },
 
   methods: {
-    onClickRemove(session) {
+    async onClickRemove(session) {
+
+      await this.$axios.get('/csrf') // get csrf cookie
+
       this.$axios.delete('/session/' + session.id)
         .then(res => {
           this.fetch()

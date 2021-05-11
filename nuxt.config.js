@@ -40,27 +40,24 @@ export default {
   // auth:
   auth: {
     strategies: {
-      local: {
-        token: {
-          required: false,
-          type: false
+      cookie: {
+        cookie: {
+          name: 'XSRF-TOKEN',
         },
-        // cookie: {
-        //   // (optional) If set we check this cookie exsistence for loggedIn check
-        //   name: 'XSRF-TOKEN',
-        // },
         endpoints: {
-          // (optional) If set, we send a get request to this endpoint before login
-          // csrf: { url: '/csrf'/*, method: 'get', propertyName: 'data.token'*/ },
+          csrf: { url: '/csrf' },
           login: { url: '/login', method: 'patch' },
-          // refresh: { url: '/refresh', method: 'post' },
-          user: { url: '/me', method: 'get' },
           logout: { url: '/logout', method: 'post' },
+          // refresh: { url: '/refresh', method: 'post' },
+          user: { url: '/user', method: 'get' },
         }
       },
     }
   },
   // axios:
+  serverMiddleware: [
+    '~/middleware-server/logger',
+  ],
   axios : {
     credentials: true,
     withCredentials: true,
