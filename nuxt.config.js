@@ -48,9 +48,12 @@ export default {
           csrf: { url: '/csrf' },
           login: { url: '/login', method: 'patch' },
           logout: { url: '/logout', method: 'post' },
-          // refresh: { url: '/refresh', method: 'post' },
+          // refresh: { url: '/refresh' },
           user: { url: '/user', method: 'get' },
-        }
+        },
+        user: {
+          property: false
+        },
       },
     }
   },
